@@ -37,6 +37,7 @@
   Actually, you might get a few comments about things you have to change first. Even so, you've come a long way, so give yourself a pat on the back! If you are an SOS student, maybe you can be approved in class. 
 
  ## 2) Development environment
+  **NEED DETAILED TIPS**
   - The best way to contribute for Pollex is using the [Docker](https://www.docker.com/) container, so all you'll need to develop are already installed.
     - First download the dockerfile in (where?);
     - Create the image: "docker build -t dockerfile";
@@ -44,7 +45,7 @@
   - You can choose also the [cmake](https://cmake.org/) installation:
     - First download the repository;
     - Move to source directory (?) and enter "make" on terminal;
-  **NEED DETAILED TIPS**
+  
 
  ## 3) Repository policy
   This repository uses GNU GENERAL PUBLIC LICENSE.
