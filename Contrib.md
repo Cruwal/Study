@@ -43,7 +43,7 @@
     - Run the image: "docker run docker_image";
   - You can choose also the [cmake](https://cmake.org/) installation:
     - First download the repository;
-    - Move to source directory (?) and enter "make" on terminal.
+    - Move to source directory (?) and enter "make" on terminal;
   **NEED DETAILED TIPS**
 
  ## 3) Repository policy
