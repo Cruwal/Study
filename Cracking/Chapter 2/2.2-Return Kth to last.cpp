@@ -5,7 +5,6 @@
 #include <iterator>
 #include <iostream>
 #include <cstdlib>
-#include <unordered_map>
 
 void show_list(std::list<int> list)
 {
