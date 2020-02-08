@@ -1,2 +1,2 @@
 # Study
-My practice studies
+My practical studies
