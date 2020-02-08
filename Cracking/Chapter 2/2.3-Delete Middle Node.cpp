@@ -17,7 +17,7 @@ void show_list(std::list<int> list)
     std::cout << std::endl;
 }
 
-// Time: O(1), memory: O(1)
+// Time: O(1), memory: O(1).
 void delete_middle_node(std::list<int>& list, std::list<int>::iterator value)
 {
     std::list<int>::iterator it;
