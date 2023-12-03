@@ -31,6 +31,29 @@ module Trees
       element < parent.key ? parent.left = new_node : parent.right = new_node
     end
 
+    def delete(element)
+      return if empty?
+
+      node = search(element)
+
+      return if node&.key != element
+
+      return transplant(node, node.right) if node.left.nil?
+      return transplant(node, node.left) if node.right.nil?
+
+      node_successor = successor(element)
+      if node_successor != node.right
+        transplant(node_successor, node_successor.right)
+
+        node_successor.right = node.right
+        node_successor.right.parent = node_successor
+      end
+
+      transplant(node, node_successor)
+      node_successor.left = node.left
+      node_successor.left.parent = node_successor
+    end
+
     def search(element)
       node = root
       until node.nil?
@@ -118,10 +141,10 @@ module Trees
 
     private
 
-        node = node.send(direction)
-      end
+    def transplant(node_a, node_b)
+      return @root = node_b if root == node_a
 
-      path
+      node_a.parent.left == node_a ? node_a.parent.left = node_b : node_a.parent.right = node_b
     end
 
     def empty?

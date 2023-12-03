@@ -67,6 +67,72 @@ RSpec.describe Trees::BinarySearch do
     end
   end
 
+  context '#delete' do
+    it 'deletes the nodes correctly' do
+      tree.delete(10)
+
+      expect(tree.root.key).to eql(50)
+      expect(tree.root.left.key).to eql(25)
+      expect(tree.root.right.key).to eql(75)
+      expect(tree.root.left.left).to be_nil
+      expect(tree.root.left.right.key).to eql(40)
+      expect(tree.root.right.left.key).to eql(60)
+      expect(tree.root.right.right.key).to eql(100)
+
+      tree.delete(25)
+
+      expect(tree.root.key).to eql(50)
+      expect(tree.root.left.key).to eql(40)
+      expect(tree.root.right.key).to eql(75)
+      expect(tree.root.left.left).to be_nil
+      expect(tree.root.left.right).to be_nil
+      expect(tree.root.right.left.key).to eql(60)
+      expect(tree.root.right.right.key).to eql(100)
+
+      tree.delete(50)
+
+      expect(tree.root.key).to eql(60)
+      expect(tree.root.left.key).to eql(40)
+      expect(tree.root.right.key).to eql(75)
+      expect(tree.root.left.left).to be_nil
+      expect(tree.root.left.right).to be_nil
+      expect(tree.root.right.left).to be_nil
+      expect(tree.root.right.right.key).to eql(100)
+
+      tree.delete(75)
+
+      expect(tree.root.key).to eql(60)
+      expect(tree.root.left.key).to eql(40)
+      expect(tree.root.right.key).to eql(100)
+      expect(tree.root.left.left).to be_nil
+      expect(tree.root.left.right).to be_nil
+      expect(tree.root.right.left).to be_nil
+      expect(tree.root.right.right).to be_nil
+
+      tree.delete(60)
+
+      expect(tree.root.key).to eql(100)
+      expect(tree.root.left.key).to eql(40)
+      expect(tree.root.right).to be_nil
+      expect(tree.root.left.left).to be_nil
+      expect(tree.root.left.right).to be_nil
+
+      tree.delete(100)
+
+      expect(tree.root.key).to eql(40)
+      expect(tree.root.left).to be_nil
+      expect(tree.root.right).to be_nil
+
+      tree.delete(40)
+
+      expect(tree.root).to be_nil
+    end
+
+    it 'returns nil when try to delete an element that is not present in the tree' do
+      expect(tree.delete(700)).to be_nil
+    end
+  end
+
   context '#search' do
     it 'returns the correct element when tree is not empty' do
       expect(tree.search(50).key).to eql(50)
