@@ -1,12 +1,13 @@
 module Trees
   class Node
     attr_reader :key
-    attr_accessor :left, :right
+    attr_accessor :left, :right, :parent
 
-    def initialize(key, left = nil, right = nil)
+    def initialize(key, left: nil, right: nil, parent: nil)
       @key = key
       @left = left
       @right = right
+      @parent = parent
     end
   end
 
@@ -26,7 +27,7 @@ module Trees
         node = element < node.key ? node.left : node.right
       end
 
-      new_node = Node.new(element)
+      new_node = Node.new(element, parent: parent)
       element < parent.key ? parent.left = new_node : parent.right = new_node
     end
 
@@ -56,16 +57,14 @@ module Trees
     def successor(element)
       return if empty?
 
-      path = search_with_path(element)
-      node = path.last[:element]
+      node = search(element)
 
       return minimum(node.right) if node&.right
 
-      i = path.size - 1
-      while i >= 0
-        return path[i][:element] if path[i][:direction] == 'left'
+      while node.parent
+        return node.parent if node.parent.left == node
 
-        i -= 1
+        node = node.parent
       end
 
       nil
@@ -79,11 +78,10 @@ module Trees
 
       return maximum(node.left) if node&.left
 
-      i = path.size - 1
-      while i >= 0
-        return path[i][:element] if path[i][:direction] == 'right'
+      while node.parent
+        return node.parent if node.parent.right == node
 
-        i -= 1
+        node = node.parent
       end
 
       nil

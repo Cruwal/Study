@@ -2,20 +2,29 @@ require_relative 'binary_search'
 require 'pry'
 
 RSpec.describe Trees::BinarySearch do
-  let(:root) do
-    Trees::Node.new(
-      50,
-      Trees::Node.new(
-        25,
-        Trees::Node.new(10),
-        Trees::Node.new(40)
-      ),
-      Trees::Node.new(
-        75,
-        Trees::Node.new(60),
-        Trees::Node.new(100)
-      )
-    )
+  let(:root) { Trees::Node.new(50) }
+  let(:root_left) { Trees::Node.new(25) }
+  let(:root_right) { Trees::Node.new(75) }
+  let(:root_left_left) { Trees::Node.new(10) }
+  let(:root_left_right) { Trees::Node.new(40) }
+  let(:root_right_left) { Trees::Node.new(60) }
+  let(:root_right_right) { Trees::Node.new(100) }
+
+  let!(:node_connections) do
+    root.left = root_left
+    root.right = root_right
+    root_left.parent = root
+    root_right.parent = root
+
+    root_left.left = root_left_left
+    root_left.right = root_left_right
+    root_left_left.parent = root_left
+    root_left_right.parent = root_left
+
+    root_right.left = root_right_left
+    root_right.right = root_right_right
+    root_right_left.parent = root_right
+    root_right_right.parent = root_right
   end
 
   #         50
@@ -48,6 +57,7 @@ RSpec.describe Trees::BinarySearch do
 
     context 'when tree is empty' do
       let(:root) { nil }
+      let!(:node_connections) { nil }
 
       it 'inserts the element correctly when tree is empty' do
         tree.insert(4)
@@ -69,6 +79,7 @@ RSpec.describe Trees::BinarySearch do
 
     context 'when tree is empty' do
       let(:root) { nil }
+      let!(:node_connections) { nil }
 
       it 'returns nil' do
         expect(tree.search(4)).to be_nil
@@ -89,6 +100,7 @@ RSpec.describe Trees::BinarySearch do
 
     context 'when tree is empty' do
       let(:root) { nil }
+      let!(:node_connections) { nil }
 
       it 'returns nil' do
         expect(tree.minimum).to be_nil
@@ -103,6 +115,7 @@ RSpec.describe Trees::BinarySearch do
 
     context 'when tree is empty' do
       let(:root) { nil }
+      let!(:node_connections) { nil }
 
       it 'returns nil' do
         expect(tree.minimum).to be_nil
@@ -123,6 +136,7 @@ RSpec.describe Trees::BinarySearch do
 
     context 'when tree is empty' do
       let(:root) { nil }
+      let!(:node_connections) { nil }
 
       it 'returns nil' do
         expect(tree.successor(45)).to be_nil
@@ -131,6 +145,7 @@ RSpec.describe Trees::BinarySearch do
 
     context 'when provides an element that is not present in the tree' do
       let(:root) { nil }
+      let!(:node_connections) { nil }
 
       it 'returns nil' do
         expect(tree.successor(80)).to be_nil
@@ -151,6 +166,7 @@ RSpec.describe Trees::BinarySearch do
 
     context 'when tree is empty' do
       let(:root) { nil }
+      let!(:node_connections) { nil }
 
       it 'returns nil' do
         expect(tree.successor(45)).to be_nil
@@ -159,6 +175,7 @@ RSpec.describe Trees::BinarySearch do
 
     context 'when provides an element that is not present in the tree' do
       let(:root) { nil }
+      let!(:node_connections) { nil }
 
       it 'returns nil' do
         expect(tree.successor(80)).to be_nil
