@@ -182,4 +182,49 @@ RSpec.describe Trees::BinarySearch do
       end
     end
   end
+
+  context '#in_order_traversal' do
+    it 'returns the elements in order' do
+      expect(tree.in_order_traversal).to eql([10, 25, 40, 50, 60, 75, 100])
+    end
+
+    context 'when tree is empty' do
+      let(:root) { nil }
+      let!(:node_connections) { nil }
+
+      it 'returns an empty array' do
+        expect(tree.in_order_traversal.empty?).to eql(true)
+      end
+    end
+  end
+
+  context '#pre_order_traversal' do
+    it 'returns the elements in pre order' do
+      expect(tree.pre_order_traversal).to eql([50, 25, 10, 40, 75, 60, 100])
+    end
+
+    context 'when tree is empty' do
+      let(:root) { nil }
+      let!(:node_connections) { nil }
+
+      it 'returns an empty array' do
+        expect(tree.pre_order_traversal.empty?).to eql(true)
+      end
+    end
+  end
+
+  context '#post_order_traversal' do
+    it 'returns the elements in post order' do
+      expect(tree.post_order_traversal).to eql([10, 40, 25, 60, 100, 75, 50])
+    end
+
+    context 'when tree is empty' do
+      let(:root) { nil }
+      let!(:node_connections) { nil }
+
+      it 'returns an empty array' do
+        expect(tree.post_order_traversal.empty?).to eql(true)
+      end
+    end
+  end
 end

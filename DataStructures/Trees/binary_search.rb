@@ -73,8 +73,7 @@ module Trees
     def predecessor(element)
       return if empty?
 
-      path = search_with_path(element)
-      node = path.last[:element]
+      node = search(element)
 
       return maximum(node.left) if node&.left
 
@@ -85,23 +84,39 @@ module Trees
       end
 
       nil
+    end
 
+    def in_order_traversal(node = @root, response = [])
+      unless node.nil?
+        in_order_traversal(node.left, response)
+        response << node.key
+        in_order_traversal(node.right, response)
+      end
+
+      response
+    end
+
+    def pre_order_traversal(node = @root, response = [])
+      unless node.nil?
+        response << node.key
+        pre_order_traversal(node.left, response)
+        pre_order_traversal(node.right, response)
+      end
+
+      response
+    end
+
+    def post_order_traversal(node = @root, response = [])
+      unless node.nil?
+        post_order_traversal(node.left, response)
+        post_order_traversal(node.right, response)
+        response << node.key
+      end
+
+      response
     end
 
     private
-
-    def search_with_path(element, node = @root)
-      path = []
-
-      until node.nil?
-        if node.key == element
-          path << { element: node, direction: nil }
-
-          return path
-        end
-
-        direction = element < node.key ? 'left' : 'right'
-        path << { element: node, direction: direction }
 
         node = node.send(direction)
       end
